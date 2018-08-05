@@ -45,7 +45,6 @@ node* siraliekle(node* r, int x){
             node* temp = (node*)malloc(sizeof(node));
             temp -> x = x;
             temp -> next = r;
-            r = temp;
 
             //son elemana git
             node* iter = r;
@@ -83,11 +82,11 @@ node* sil(node* r, int x){
         return iter -> next;
     }
 
-    while(iter -> next != NULL && iter -> next -> x != x){
+    while(iter -> next != r && iter -> next -> x != x){
         iter = iter -> next;
     }
 
-    if(iter -> next == NULL){
+    if(iter -> next == r){
         printf("Sayı Bulunamadı.\n");
         return r;
     }
