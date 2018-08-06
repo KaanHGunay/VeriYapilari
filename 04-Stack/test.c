@@ -1,21 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "StackArray.h"
+#include "StackLinkedList.h"
 
 main(int argc, char const *argv[])
 {
-    stack* s1 = tanim();
-    stack* s2 = tanim();
-    
-    for(int i = 0; i < 10; i++)
-    {
-        push(i * 10, s1);        
-    }
-    bastir(s1);
-    
-    for(int i = 0; i < 10; i++)
-    {
-        push(pop(s1), s2);
-    }
-    bastir(s2);
+    node* s = NULL;
+    s = push(s, 10);
+    s = push(s, 20);
+    bastir(s);
+    printf("%d -> ", pop(s));
+    s = push(s, 30);
+    printf("%d -> ", pop(s));
+    printf("%d -> ", pop(s));
 }
