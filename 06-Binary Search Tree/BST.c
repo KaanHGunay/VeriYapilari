@@ -82,17 +82,49 @@ int min(node* agac){
     return agac -> data;
 }
 
+node* sil(node* agac, int x){
+    if(agac == NULL){
+        return NULL;
+    }
+
+    if(agac -> data == x){
+        if(agac -> sol == NULL && agac -> sag == NULL){ //agacın sağ ve solu boş ise
+            return NULL;
+        }
+
+        if(agac -> sag != NULL){ //agacın sağ tarafı dolu ise
+            agac -> data = min(agac -> sag);
+            agac -> sag = sil(agac -> sag, min(agac -> sag));
+            return agac;
+        }
+        
+        //agacın sağı boş solu dolu ise
+        agac -> data = max(agac -> sol);
+        agac -> sol = sil(agac -> sol, max(agac -> sol));
+        return agac;
+    }
+
+    if(agac -> data < x){
+        agac -> sag = sil(agac -> sag, x);
+        return agac;
+    }
+
+    agac -> sol = sil(agac -> sol, x);
+    return agac;
+}
+
 main(int argc, char const *argv[]){
     node* agac = NULL;
-    agac = ekle(agac, 12);
+    agac = ekle(agac, 56);
     agac = ekle(agac, 200);
+    agac = ekle(agac, 26);
     agac = ekle(agac, 190);
     agac = ekle(agac, 213);
-    agac = ekle(agac, 56);
-    agac = ekle(agac, 24);
     agac = ekle(agac, 18);
-    agac = ekle(agac, 27);
     agac = ekle(agac, 28);
+    agac = ekle(agac, 12);
+    agac = ekle(agac, 24);
+    agac = ekle(agac, 17);
     dolas_kucuktenBuyuge(agac);
     printf("\n");
     dolas_buyuktenKucuge(agac);
@@ -100,4 +132,7 @@ main(int argc, char const *argv[]){
     printf("%d\n", bul(agac, 100));
     printf("%d\n", bul(agac, 200));
     printf("max = %d, min = %d\n", max(agac), min(agac));
+    agac = sil(agac, 190);
+    agac = sil(agac, 56);
+    dolas_buyuktenKucuge(agac);
 }
